@@ -20,6 +20,9 @@
 				"ms-toolsai.jupyter"
 			]
 		}
+	},
+	"features": {
+		"ghcr.io/devcontainers/features/azure-cli:1": {}
 	}
 
 	// Configure tool-specific properties.
