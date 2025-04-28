@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "Copy Files From Land Registry"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "6e103d33-72e8-82c5-4186-353c03d3efbf"
+  }
+}

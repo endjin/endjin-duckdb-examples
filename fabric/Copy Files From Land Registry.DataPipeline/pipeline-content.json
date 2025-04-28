@@ -1,0 +1,125 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "ForEach",
+        "typeProperties": {
+          "items": {
+            "value": "@pipeline().parameters.FileList",
+            "type": "Expression"
+          },
+          "activities": [
+            {
+              "type": "Copy",
+              "typeProperties": {
+                "source": {
+                  "type": "BinarySource",
+                  "formatSettings": {
+                    "type": "BinaryReadSettings"
+                  },
+                  "storeSettings": {
+                    "type": "HttpReadSettings",
+                    "requestMethod": "GET"
+                  },
+                  "datasetSettings": {
+                    "type": "Binary",
+                    "typeProperties": {
+                      "location": {
+                        "type": "HttpServerLocation",
+                        "relativeUrl": {
+                          "value": "@item()",
+                          "type": "Expression"
+                        }
+                      }
+                    },
+                    "externalReferences": {
+                      "connection": "8fd97f75-c45a-4d45-bb97-6eec16d157d8"
+                    },
+                    "annotations": []
+                  }
+                },
+                "sink": {
+                  "type": "BinarySink",
+                  "storeSettings": {
+                    "type": "LakehouseWriteSettings"
+                  },
+                  "datasetSettings": {
+                    "type": "Binary",
+                    "typeProperties": {
+                      "location": {
+                        "type": "LakehouseLocation",
+                        "folderPath": "land_registry",
+                        "fileName": {
+                          "value": "@item()",
+                          "type": "Expression"
+                        }
+                      }
+                    },
+                    "linkedService": {
+                      "name": "PricePaidData",
+                      "properties": {
+                        "type": "Lakehouse",
+                        "typeProperties": {
+                          "artifactId": "b6858b09-0bed-a06c-4203-dd063881b34b",
+                          "workspaceId": "00000000-0000-0000-0000-000000000000",
+                          "rootFolder": "Files"
+                        },
+                        "annotations": []
+                      }
+                    },
+                    "annotations": []
+                  }
+                },
+                "enableStaging": false
+              },
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureInput": false,
+                "secureOutput": false
+              },
+              "name": "Copy Single File From Land Registry",
+              "description": "Simple pipeline to ingest individual files from the UK land Registry which is open data for house sales in the UK since 1995.",
+              "dependsOn": []
+            }
+          ]
+        },
+        "name": "Iterate Over Files",
+        "description": "Step through each file in the FileList parameter and download it.",
+        "dependsOn": []
+      }
+    ],
+    "parameters": {
+      "FileList": {
+        "type": "array",
+        "defaultValue": [
+          "pp-2000.csv",
+          "pp-2001.csv",
+          "pp-2002.csv",
+          "pp-2003.csv",
+          "pp-2004.csv",
+          "pp-2005.csv",
+          "pp-2006.csv",
+          "pp-2007.csv",
+          "pp-2008.csv",
+          "pp-2009.csv",
+          "pp-2010.csv",
+          "pp-2011.csv",
+          "pp-2012.csv",
+          "pp-2013.csv",
+          "pp-2014.csv",
+          "pp-2015.csv",
+          "pp-2016.csv",
+          "pp-2017.csv",
+          "pp-2018.csv",
+          "pp-2019.csv",
+          "pp-2020.csv",
+          "pp-2021.csv",
+          "pp-2022.csv",
+          "pp-2023.csv"
+        ]
+      }
+    }
+  }
+}
