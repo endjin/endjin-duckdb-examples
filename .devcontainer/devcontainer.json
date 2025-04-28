@@ -12,7 +12,7 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "curl -sSL https://install.python-poetry.org | python3 - && poetry install --no-root",
+	"postCreateCommand": "curl -sSL https://install.python-poetry.org | python3 - && poetry install",
 	"customizations": {
 		"vscode": {
 			"extensions": [
