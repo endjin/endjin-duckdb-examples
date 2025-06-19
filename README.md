@@ -6,7 +6,7 @@ A set of worked examples loading and transforming data using DuckDB.
 
 - Git: to pull down this repository to allow you to run it locally.
 - VS Code: to view and interactively run the code.
-- Docker (or equivalent): to create a containerised Python environment to which VS Code can connect to execute the code.
+- Docker (or equivalent): to create a containerized Python environment to which VS Code can connect to execute the code.
 
 ## Steps
 
@@ -26,7 +26,7 @@ You should be prompted by VS Code to open the project in a Dev Container as soon
 
 if not: `CRTL + SHIFT + P` then select "Reopen in Container" from command menu.
 
-The Dev Container may take a few minnutes to build first time.  This sets up everyting you need to run the code: Python environment, Python packages required and Azure CLI.
+The Dev Container may take a few minutes to build first time.  This sets up everything you need to run the code: Python environment, Python packages required and Azure CLI.
 
 Once you are running inside the Dev Container, navigate to the `notebooks` folder where you will find a series Jupyter notebooks, each providing an example of using DuckDB.
 
