@@ -27,6 +27,7 @@ class LandRegistryImporter:
     
     
     BASE_URL = "http://prod.publicdata.landregistry.gov.uk.s3-website-eu-west-1.amazonaws.com/"
+    MONTHLY_UPDATE_FILE_NAME = "pp-monthly-update-new-version.csv"
     
     DATA_FOLDER = Path("../data/land_registry")
     
@@ -38,26 +39,34 @@ class LandRegistryImporter:
         self._check_years_are_valid()
         self._create_folder_if_not_exists()
 
-    def import_data(self):
+    def import_yearly_data(self) -> None:
         for year in self.years_to_import:
-            self._download_file(year)
+            self._get_yearly_file(year)
+
+    def import_monthly_update(self) -> None:
+        file_path = self.DATA_FOLDER / self.MONTHLY_UPDATE_FILE_NAME
+        url = self._build_file_url(self.MONTHLY_UPDATE_FILE_NAME)
+        self._download_file(self.MONTHLY_UPDATE_FILE_NAME, file_path, url)
 
     def _create_folder_if_not_exists(self):
         self.DATA_FOLDER.mkdir(parents=True, exist_ok=True)
 
-    def _create_file_name(self, year: int) -> str:
+    def _create_yearly_file_name(self, year: int) -> str:
         return f"pp-{year}.csv"
 
     def _build_file_url(self, file_name) -> str:
         return f"{self.BASE_URL}{file_name}"
 
-    def _download_file(self, year: int) -> None:
-        file_name = self._create_file_name(year)
+    def _get_yearly_file(self, year: int) -> None:
+        file_name = self._create_yearly_file_name(year)
         file_path = self.DATA_FOLDER / file_name
         if file_path.exists():
             logger.info(f"File {file_name} already exists")
             return
         url = self._build_file_url(file_name)
+        self._download_file(file_name, file_path, url)
+
+    def _download_file(self, file_name, file_path, url):
         logger.info(f"Downloading file {file_name} from {url}")
         response = requests.get(url)
         with open(file_path, "wb") as file:
