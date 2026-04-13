@@ -1,7 +1,12 @@
+# Claude Code Assets
+CLAUDE.md
+skills/
+
 # Project specific .gitignore rules
 data/
 databases/
 ducklake*/
+temp*/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
